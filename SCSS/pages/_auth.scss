@@ -1,0 +1,208 @@
+@use "../abstract";
+
+.auth {
+    min-height: 100vh;
+    display: flex;
+
+    @supports (-webkit-touch-callout: none) {
+        min-height: -webkit-fill-available;
+    }
+
+    &__intro,
+    &__content {
+        flex: 1;
+        padding: 0 30px;
+    }
+
+    &__intro {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        background-color: var(--auth-intro-bg);
+
+        &-text {
+            max-width: 412px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 500;
+            line-height: 144.444%;
+            color: var(--auth-intro-text-color);
+
+            @include abstract.screen(md) {
+                font-size: 1.5rem;
+            }
+        }
+
+        &-img {
+            width: min(424px, 100%);
+        }
+
+        &-logo,
+        &-next {
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            translate: -50% 0;
+        }
+
+        &-next {
+            top: initial;
+            bottom: 50px;
+        }
+    }
+
+    &__content {
+        background-color: var(--auth-content-bg);
+
+        @include abstract.screen(md) {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            translate: 0;
+            transition: translate 0.3s;
+            overflow-y: auto;
+
+            &.hide {
+                translate: 100% 0;
+            }
+        }
+
+        &-inner {
+            width: min(460px, 100%);
+            margin: 0 auto;
+            padding: 50px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            @include abstract.screen(md) {
+                padding: 32px 0;
+            }
+        }
+    }
+
+    &__heading {
+        color: var(--auth-heading-color);
+        margin-top: 50px;
+        font-size: 3rem;
+        font-weight: 500;
+        line-height: 146.667%;
+
+        @include abstract.screen(md) {
+            font-size: 2.2rem;
+            margin-top: 40px;
+        }
+    }
+
+    &__desc {
+        padding: 0 20px;
+        text-align: center;
+        color: #9e9da8;
+        margin-top: 10px;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 146.667%;
+
+        @include abstract.screen(md) {
+            font-size: 1.4rem;
+        }
+    }
+
+    &__form {
+        width: 100%;
+        margin-top: 30px;
+
+        &-forgot {
+            margin-top: 10px;
+        }
+
+        @include abstract.screen(md) {
+            margin-top: 10px;
+        }
+    }
+
+    &__link {
+        user-select: none;
+        color: #0071dc;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 146.667%;
+
+        @include abstract.screen(md) {
+            font-size: 1.4rem;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__btn-group {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        @include abstract.screen(md) {
+            margin-top: 40px;
+            gap: 20px;
+        }
+    }
+
+    &__btn {
+        border-radius: 10px !important;
+        // color: var(--auth-btn-color);
+        width: 100%;
+    }
+
+    &__text {
+        color: #9e9da8;
+        margin-top: 108px;
+        font-size: 1.8rem;
+        font-weight: 400;
+        line-height: 144.444%;
+
+        @include abstract.screen(md) {
+            font-size: 1.6rem;
+            margin-top: 40px;
+        }
+
+        &-link {
+            font-size: inherit;
+        }
+    }
+
+    &__message {
+        margin-top: 20px;
+    }
+
+    &__password {
+        &-list {
+            margin-top: 20px;
+            text-align: left;
+            margin-right: auto;
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+        }
+
+        &-icon {
+            margin: 8px 10px 0 0;
+            filter: brightness(0) saturate(100%) invert(48%) sepia(69%) saturate(304%) hue-rotate(60deg) brightness(88%)
+                contrast(89%);
+        }
+
+        &-text {
+            margin-top: 8px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 146.667%;
+            color: #97bf8b;
+        }
+    }
+}

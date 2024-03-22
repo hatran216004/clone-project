@@ -1,0 +1,144 @@
+@use "../abstract";
+
+.profile {
+    padding-bottom: 50px;
+    &-container {
+        margin-top: 30px;
+    }
+
+    &__sidebar {
+        padding-bottom: 30px;
+        border-radius: 20px;
+        background-color: var(--profile-sidebar-bg);
+        box-shadow: 0px 20px 60px 10px var(--profile-sidebar-shadow);
+    }
+}
+
+.profile-user {
+    padding: 35px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    color: #fff;
+    background: linear-gradient(180deg, rgba(26, 22, 46, 0) 0%, #1a162e 100%),
+        url(../images/profile/cover.jpg) no-repeat center / cover;
+    box-shadow: 0px 20px 60px 10px var(--profile-sidebar-shadow);
+
+    &__avatar {
+        width: 121px;
+        height: 121px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #ccc content-box;
+
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0px 4px 14px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    &__name {
+        margin-top: 15px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 144.444%;
+    }
+
+    &__desc {
+        margin-top: 2px;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 146.667%;
+    }
+}
+
+.profile-menu {
+    margin-top: 25px;
+    padding: 0 30px;
+
+    &__title {
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 144.444%;
+    }
+
+    &__list {
+        margin-top: 12px;
+    }
+
+    &__link {
+        height: 36px;
+        padding-left: 10px;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        border-radius: 5px;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 146.667%;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: var(--profile-menu-link-hover-color);
+            cursor: pointer;
+        }
+    }
+
+    &__icon {
+        width: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.profile-info {
+    user-select: none;
+    padding: 30px;
+    border-radius: 20px;
+    background: var(--checkout-cart-info-bg);
+    box-shadow: 0px 20px 60px 10px var(--checkout-cart-info-shadow);
+
+    @include abstract.screen(md) {
+        margin-top: 20px;
+        padding: 16px;
+    }
+
+    &__back-arrow {
+        display: block;
+        width: 50px;
+        padding-right: 20px;
+    }
+
+    &__heading {
+        display: flex;
+        align-items: center;
+
+        font-size: 2.4rem;
+        font-weight: 700;
+        line-height: 141.667%;
+
+        &--lv2 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            line-height: 145.455%;
+
+            @include abstract.screen(sm) {
+                font-size: 2rem;
+                font-weight: 500;
+                line-height: 146.667%;
+            }
+        }
+    }
+
+    &__desc {
+        margin: 4px 0 16px;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 146.667%;
+    }
+}

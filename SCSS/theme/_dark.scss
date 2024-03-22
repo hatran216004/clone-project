@@ -1,0 +1,127 @@
+@use "../abstract";
+
+html.dark {
+    --text-color: #fff;
+    --icon-color: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2832%) hue-rotate(356deg)
+        brightness(117%) contrast(100%);
+
+    --body-bg: #292e39;
+    --header-background: #171c28;
+    --top-act-group-bg: #292e39;
+    --top-act-group-shadow: rgba(0, 0, 0, 0.2);
+    --top-act-separate: #545458;
+
+    @include abstract.screen(lg) {
+        --header-shadow-color: rgba(0, 0, 0, 0.2);
+    }
+
+    // Header
+    --act-dropdown-inner-bg: #2f3441;
+    --act-dropdown-inner-shadow: rgba(23, 28, 40, 0.4);
+    --act-dropdow-bottom-border: #171c28;
+
+    // Dropdown
+    --dropdown-arrow-color: brightness(0) saturate(100%) invert(17%) sepia(29%) saturate(398%) hue-rotate(185deg)
+        brightness(97%) contrast(91%);
+    --dropdown-bg-color: #2f3441;
+    --dropdown-shadow-color: rgba(23, 28, 40, 0.4);
+    --top-menu-border-color: #171c28;
+    --menu-column-link-color: #b9babe;
+    --menu-column-icon-color: brightness(0) saturate(100%) invert(100%) sepia(84%) saturate(744%) hue-rotate(180deg)
+        brightness(105%) contrast(97%);
+
+    // Sidebar
+    --sidebar-bg: #292e39;
+    --sidebar-shadow: rgba(23, 28, 40, 0.4);
+
+    // Category item
+    --cate-item-bg: #171c28;
+    --cate-item-thumb-bg: #292e39;
+    --cate-item-title-color: #fff;
+
+    // Buttons
+    --filter-btn-color: #fff;
+    --filter-btn-bg: #171c28;
+    --like-btn-bg: #292e39;
+    --btn-icon-color: brightness(0) saturate(100%) invert(61%) sepia(19%) saturate(125%) hue-rotate(187deg)
+        brightness(90%) contrast(90%);
+
+    // Product card
+    --product-card-bg: #171c28;
+    --product-card-shadow: rgba(0, 0, 0, 0.2);
+
+    // Filter form
+    --filter-form-bg: var(--dropdown-bg-color);
+    --filter-form-shadow: rgba(0, 0, 0, 0.4);
+    --form-tag-bg: #171c28;
+    --form-tag-color-hover: #171c28;
+    --form-tag-bg-hover: #f8f8fb;
+    --filter-form-arrow: brightness(0) saturate(100%) invert(17%) sepia(31%) saturate(370%) hue-rotate(186deg)
+        brightness(97%) contrast(93%);
+
+    // Footer
+    --footer-form-input-border-color: #fff;
+    --footer-bg: var(--header-background);
+
+    // Auth
+    --auth-content-bg: #2f3441;
+    --auth-heading-color: #b9babe;
+    --auth-btn-color: var(--auth-heading-color);
+    --auth-intro-bg: #171c28;
+    --auth-intro-text-color: #b9babe;
+
+    //Form
+    --form-text-input-border-color: #b9babe;
+    --form-input-placeholder-color: var(--form-text-input-border-color);
+    --form-checkbox-label-color: var(--form-text-input-border-color);
+    --form-select-dialog-bg: var(--modal-bg);
+    --form-select-dialog-option-hover-color: rgba(119, 218, 230, 0.9);
+
+    // Product detail
+    --product-detail-bg: #292e39;
+    --prod-detail-info-bg: #171c28;
+    --prod-info-tag-bg: var(--product-detail-bg);
+    --prod-content-bg: #171c28;
+
+    // Breakcrumbs
+    --breakcrumbs-bg: #171c28;
+    --breakcrumbs-shadow: rgba(23, 28, 40, 0.2);
+
+    // Search bar
+    --search-bar-bg: #171c28;
+
+    // Review card
+    --review-card-bg: #171c28;
+
+    // Text content
+    --text-content-hr-bg: rgba(103, 176, 68, 0.4);
+
+    // Checkout
+    --checkout-page-breakcrumbs-bg: #171c28;
+    --checkout-cart-item-border: #292e39;
+    --checkout-cart-info-bg: #171c28;
+    --checkout-cart-info-shadow: rgba(23, 28, 40, 0.2);
+    --checkout-payment-item-bg: #292e39;
+    --checkout-view-detail-color: #97c7f5;
+
+    // Gift item
+    --gift-item-thumb-wrap-bg: #292e39;
+
+    // modal
+    --modal-bg: var(--dropdown-bg-color);
+    --profile-sidebar-bg: #171c28;
+    --profile-sidebar-shadow: rgba(23, 28, 40, 0.2);
+    --profile-menu-link-hover-color: #d9a09d;
+    // Account info
+    --account-info-bg: #292e39;
+    --account-info-icon: #171c28;
+
+    // Separate
+    --separate-color: #292e39;
+
+    // Calendar input type date
+    ::-webkit-calendar-picker-indicator {
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(65deg) brightness(104%)
+            contrast(104%);
+    }
+}

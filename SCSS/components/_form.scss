@@ -1,0 +1,393 @@
+@use "../abstract";
+
+$error-color: #ed4337;
+.form {
+    &:has(:invalid) &__submit-btn {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    &__row {
+        display: flex;
+        gap: 30px;
+
+        > * {
+            flex: 1;
+        }
+
+        @include abstract.screen(md) {
+            gap: 20px;
+        }
+
+        @include abstract.screen(md) {
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+
+    &__group {
+        margin-top: 30px;
+
+        @include abstract.screen(md) {
+            margin-top: 20px;
+        }
+
+        &--inline {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__group:has(:invalid):has(&__input:not(:placeholder-shown)) {
+        .form__text-input {
+            border-color: $error-color;
+        }
+
+        .form__error,
+        .form__input-icon--error {
+            display: block;
+        }
+
+        .form__input-icon {
+            display: none;
+        }
+    }
+
+    &__error {
+        text-align: left;
+        font-size: 1.4rem;
+        margin-top: 10px;
+        font-weight: 500;
+        color: $error-color;
+        display: none;
+    }
+
+    &__input-icon--error {
+        margin-left: 12px;
+        display: none;
+        animation: shake 0.5s;
+    }
+
+    &__text-area,
+    &__text-input {
+        display: flex;
+        align-items: center;
+
+        padding: 0 12px;
+        border-radius: 10px;
+        border: 1px solid var(--form-text-input-border-color);
+
+        &:focus-within {
+            border-color: #77dae6;
+        }
+    }
+
+    &__text-input {
+        position: relative;
+        height: 50px;
+
+        &--small {
+            height: 42px;
+        }
+
+        @include abstract.screen(md) {
+            height: 48px;
+        }
+    }
+
+    &__select-dialog {
+        max-height: 300px;
+        min-width: 230px;
+        display: flex;
+        flex-direction: column;
+
+        position: absolute;
+        bottom: 55px;
+        left: 12px;
+        z-index: 3;
+
+        padding-bottom: 10px;
+        background-color: var(--form-select-dialog-bg);
+        border: 1px solid var(--form-text-input-border-color);
+        box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075), /* shadow ring 👇 */ 0 0 0 1px hsla(0, 0%, 0%, 0.05),
+            /* multiple soft shadows 👇 */ 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02), 0 0.9px 1.5px hsla(0, 0%, 0%, 0.045),
+            0 3.5px 6px hsla(0, 0%, 0%, 0.09);
+        border-radius: 10px;
+        opacity: 0;
+        visibility: hidden;
+        translate: 0 8px;
+
+        transition: opacity, visibility, translate;
+        transition-duration: 0.25s;
+
+        @include abstract.screen(sm) {
+            position: fixed;
+            inset: 0;
+            max-height: initial;
+            width: initial;
+            border-radius: 0;
+        }
+
+        &.show {
+            opacity: 1;
+            visibility: visible;
+            translate: 0;
+        }
+    }
+
+    &__dialog-heading {
+        font-size: 1.8rem;
+        font-weight: 600;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    &__close-dialog {
+        padding: 0 15px;
+        font-size: 4rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        opacity: 0.7;
+    }
+
+    &__search {
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        height: 38px;
+        flex-shrink: 0;
+        border-bottom: 1px solid var(--form-text-input-border-color);
+
+        @include abstract.screen(lg) {
+            height: 48px;
+        }
+
+        @include abstract.screen(sm) {
+            flex-direction: row-reverse;
+            padding: 0 15px;
+            margin: 15px 30px 0;
+            border-radius: 10px;
+            border: 1px solid var(--form-text-input-border-color);
+        }
+
+        &-input {
+            flex: 1;
+            height: 100%;
+            font-size: 1.6rem;
+        }
+
+        &-icon {
+            margin-left: 12px;
+            width: 16px;
+
+            @include abstract.screen(sm) {
+                width: 20px;
+                margin: 0 12px 0 0;
+            }
+        }
+    }
+
+    &__options-list {
+        overscroll-behavior: contain;
+        margin-top: 10px;
+        flex: 1;
+        overflow-y: auto;
+
+        @supports (-webkit-touch-callout: none) {
+            padding-bottom: 300px;
+        }
+    }
+
+    &___option {
+        user-select: none;
+        font-size: 1.4rem;
+        padding: 10px 20px;
+
+        @include abstract.screen(lg) {
+            font-size: 1.6rem;
+            padding: 18px 30px;
+        }
+
+        &--active {
+            font-weight: 500;
+            background-color: rgba($color: #77dae6, $alpha: 0.5);
+        }
+
+        &:not(&--active):hover {
+            cursor: pointer;
+            background-color: var(--form-select-dialog-option-hover-color);
+        }
+    }
+
+    &__text-area {
+        height: 100px;
+        padding: 12px;
+
+        &-input {
+            resize: none;
+        }
+    }
+
+    &__input,
+    &__text-area-input {
+        flex: 1;
+        height: 100%;
+        width: 100%;
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 144.444%;
+
+        @include abstract.screen(md) {
+            font-size: 1.6rem;
+        }
+
+        &::placeholder {
+            color: var(--form-placeholder-color);
+        }
+    }
+
+    &__input {
+        &-icon {
+            margin-left: 12px;
+        }
+    }
+
+    &__pull-right {
+        margin-left: auto;
+    }
+
+    &__checkbox {
+        user-select: none;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        &::after {
+            content: "";
+            width: 13px;
+            height: 8px;
+            border-left: 3px solid #fff;
+            border-bottom: 3px solid #fff;
+            rotate: -45deg;
+            position: absolute;
+            top: 4.5px;
+            left: 3px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+
+        &::before {
+            content: "";
+            left: 0;
+            position: absolute;
+            width: 19px;
+            height: 19px;
+            border-radius: 4px;
+            border: 1px solid #b9babe;
+        }
+
+        &:has(:checked) {
+            &::before {
+                background-color: #ffb700;
+                border-color: transparent;
+            }
+
+            &::after {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        &-label {
+            cursor: pointer;
+            margin-left: 29px;
+            color: var(--form-checkbox-label-color);
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 146.667%;
+
+            @include abstract.screen(md) {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    &__label {
+        user-select: none;
+        display: block;
+        font-size: 2.2rem;
+        font-weight: 500;
+        line-height: 145.455%;
+
+        &--medium {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            line-height: 144.444%;
+        }
+
+        &--small {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+            line-height: 142.857%;
+        }
+    }
+
+    &__select-wrap {
+        border-radius: 6px;
+        border: 1px solid #d2d1d6;
+        display: flex;
+        align-items: center;
+        height: 45px;
+    }
+
+    &__select {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 14px;
+        min-width: var(--width, 108px);
+        width: 100%;
+        height: calc(100% - 10px);
+
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 142.857%;
+        cursor: pointer;
+    }
+
+    &__select + &__select {
+        border-left: 1px solid #d2d1d6;
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+
+        @include abstract.screen(sm) {
+            gap: 10px;
+        }
+    }
+
+    &__tag {
+        border-radius: 6px;
+        padding: 6px 12px;
+        color: #9e9da8;
+        background: var(--form-tag-bg);
+
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 142.857%;
+
+        transition: color 0.25s, background-color 0.25s;
+
+        &:hover {
+            color: var(--form-tag-color-hover);
+            background: var(--form-tag-bg-hover);
+        }
+    }
+}

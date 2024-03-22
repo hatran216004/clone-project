@@ -1,0 +1,16 @@
+.form-card {
+    &__label {
+        margin-bottom: 10px;
+    }
+
+    &__bottom {
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    &__cancel {
+        font-weight: 500;
+    }
+}

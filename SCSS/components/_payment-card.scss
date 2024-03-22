@@ -1,0 +1,112 @@
+.payment-card {
+    user-select: none;
+    background-color: var(--bg-color);
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+
+    &__img {
+        z-index: -1;
+        top: 0;
+        right: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    &__top {
+        display: flex;
+        gap: 6px;
+    }
+
+    &__type {
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 142.857%;
+    }
+
+    &__number {
+        margin-top: 37px;
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 144.444%;
+    }
+
+    &__bottom {
+        margin-top: 20px;
+        display: flex;
+    }
+
+    &__expired {
+        margin: 0 auto 0 40px;
+    }
+
+    &__label {
+        font-size: 0.8rem;
+        font-weight: 500;
+        line-height: 175%;
+    }
+
+    &__value {
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 140%;
+    }
+
+    &__circle {
+        --circle-width: 28px;
+
+        align-self: flex-end;
+        position: relative;
+        width: 42px;
+        height: 28px;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+
+            width: var(--circle-width);
+            height: var(--circle-width);
+            border-radius: 50%;
+        }
+
+        &::before {
+            background-color: #f94545;
+            z-index: 1;
+            left: 0;
+            mix-blend-mode: hard-light;
+        }
+
+        &::after {
+            background-color: #ffb700;
+            right: 0;
+        }
+    }
+}
+
+.new-card {
+    border-radius: 10px;
+    border: 1px dashed #d2d1d6;
+    height: 100%;
+    min-height: 171px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    &:hover &__text,
+    &:hover &__icon {
+        opacity: 0.7;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 142.857%;
+    }
+}

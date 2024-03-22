@@ -1,0 +1,123 @@
+@use "../abstract";
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: Gordita, sans-serif;
+    color: var(--text-color);
+    background: var(--body-bg);
+}
+
+img,
+input,
+label,
+textarea,
+select,
+button {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+textarea,
+input,
+button {
+    background-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    margin: 0;
+}
+
+/* Change the white to any color */
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 1s 9999s;
+    -webkit-text-fill-color: var(--text-color);
+    caret-color: var(--text-color);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.icon {
+    filter: var(--icon-color);
+}
+
+.container {
+    @include abstract.screen(sm) {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
+i,
+em {
+    font-style: italic;
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+
+u {
+    text-decoration: underline;
+}
+
+img {
+    user-select: none;
+}
+
+.separate {
+    margin: var(--margin) 0;
+    height: 1px;
+    background-color: var(--separate-color);
+}
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--line-clamp, 2);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
