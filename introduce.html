@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="./assets/CSS/main.css" />
+    </head>
+    <body>
+        <div class="introduce">
+            <header class="introduce__header">
+                <nav>
+                    <a href="./index-logined.html">Home</a>
+                </nav>
+            </header>
+
+            <!-- carousel -->
+            <div class="introduce__carousel">
+                <!-- list item -->
+                <div class="introduce__list">
+                    <div class="introduce__item">
+                        <img src="./assets/images/intoduce/introduce-img-1.avif" />
+                        <div class="introduce__content">
+                            <div class="introduce__author">Hello</div>
+                            <div class="introduce__title">Trần Minh Hà</div>
+                            <div class="introduce__topic"></div>
+                            <div class="introduce__des">
+                                <!-- lorem 50 -->
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt
+                                minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda
+                                facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi
+                                reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum
+                                laudantium?
+                            </div>
+                            <div class="introduce__buttons">
+                                <button>SEE MORE</button>
+                                <button>SUBSCRIBE</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="introduce__item">
+                        <img src="./assets/images/intoduce/introduce-img-2.avif" />
+                        <div class="introduce__content">
+                            <div class="introduce__author">Hello</div>
+                            <div class="introduce__title">Nguyễn Trọng Hiếu</div>
+                            <div class="introduce__topic"></div>
+                            <div class="introduce__des">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt
+                                minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda
+                                facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi
+                                reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum
+                                laudantium?
+                            </div>
+                            <div class="introduce__buttons">
+                                <button>SEE MORE</button>
+                                <button>SUBSCRIBE</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="introduce__item">
+                        <img src="./assets/images/intoduce/introduce-img-3.avif" />
+                        <div class="introduce__content">
+                            <div class="introduce__author">Hello</div>
+                            <div class="introduce__title">Thạch Quốc Điền</div>
+                            <div class="introduce__topic"></div>
+                            <div class="introduce__des">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt
+                                minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda
+                                facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi
+                                reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum
+                                laudantium?
+                            </div>
+                            <div class="introduce__buttons">
+                                <button>SEE MORE</button>
+                                <button>SUBSCRIBE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- list thumnail -->
+                <div class="introduce__thumbnail">
+                    <div class="introduce__item">
+                        <img src="./assets/images/intoduce/introduce-img-1.avif" />
+                        <div class="introduce__content">
+                            <div class="introduce__title">Hà</div>
+                            <div class="introduce__des">Description</div>
+                        </div>
+                    </div>
+                    <div class="introduce__item">
+                        <img src="./assets/images/intoduce/introduce-img-2.avif" />
+                        <div class="introduce__content">
+                            <div class="introduce__title">Hiếu</div>
+                            <div class="introduce__des">Description</div>
+                        </div>
+                    </div>
+                    <div class="introduce__item">
+                        <img src="./assets/images/intoduce/introduce-img-3.avif" />
+                        <div class="introduce__content">
+                            <div class="introduce__title">Điền</div>
+                            <div class="introduce__des">Description</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- next prev -->
+
+                <div class="introduce__arrows">
+                    <button id="introduce__prev"><</button>
+                    <button id="introduce__next">></button>
+                </div>
+                <!-- time running -->
+                <div class="introduce__time"></div>
+            </div>
+        </div>
+
+        <script>
+            // Step 1: Get DOM
+            let nextDom = document.getElementById("introduce__next");
+            let prevDom = document.getElementById("introduce__prev");
+
+            let carouselDom = document.querySelector(".introduce__carousel");
+            let SliderDom = carouselDom.querySelector(".introduce__carousel .introduce__list");
+            let thumbnailBorderDom = document.querySelector(".introduce__carousel .introduce__thumbnail");
+            let thumbnailItemsDom = thumbnailBorderDom.querySelectorAll(".introduce__item");
+            let timeDom = document.querySelector(".introduce__carousel .introduce__time");
+
+            thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+            let timeRunning = 3000;
+            let timeAutoNext = 7000;
+
+            nextDom.onclick = function () {
+                showSlider("introduce__next");
+            };
+
+            prevDom.onclick = function () {
+                showSlider("introduce__prev");
+            };
+
+            let runTimeOut;
+            let runNextAuto = setTimeout(() => {
+                nextDom.click();
+            }, timeAutoNext);
+
+            function showSlider(type) {
+                let SliderItemsDom = SliderDom.querySelectorAll(
+                    ".introduce__carousel .introduce__list .introduce__item"
+                );
+                let thumbnailItemsDom = document.querySelectorAll(
+                    ".introduce__carousel .introduce__thumbnail .introduce__item"
+                );
+
+                if (type === "introduce__next") {
+                    SliderDom.appendChild(SliderItemsDom[0]);
+                    thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+                    carouselDom.classList.add("introduce__next");
+                } else {
+                    SliderDom.prepend(SliderItemsDom[SliderItemsDom.length - 1]);
+                    thumbnailBorderDom.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
+                    carouselDom.classList.add("introduce__prev");
+                }
+                clearTimeout(runTimeOut);
+                runTimeOut = setTimeout(() => {
+                    carouselDom.classList.remove("introduce__next");
+                    carouselDom.classList.remove("introduce__prev");
+                }, timeRunning);
+
+                clearTimeout(runNextAuto);
+                runNextAuto = setTimeout(() => {
+                    nextDom.click();
+                }, timeAutoNext);
+            }
+        </script>
+    </body>
+</html>

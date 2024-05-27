@@ -169,12 +169,12 @@
                                 <div class="cart-info__separate"></div>
 
                                 <h2 class="cart-info__sub-heading">Items details</h2>
-                                <div class="cart-info__list">
+                                <div class="cart-info__list" id="checkout-list">
                                     <!-- Cart item 1 -->
                                     <article class="cart-item">
                                         <a href="./product-detail-logined.html" class="">
                                             <img
-                                                src="./assets/images/products/product-1.png"
+                                                src="./assets/images/products/product-1.jpg"
                                                 alt=""
                                                 class="cart-item__thumb"
                                             />
@@ -242,7 +242,7 @@
                                     <article class="cart-item">
                                         <a href="./product-detail-logined.html" class="">
                                             <img
-                                                src="./assets/images/products/product-2.png"
+                                                src="./assets/images/products/product-2.jpg"
                                                 alt=""
                                                 class="cart-item__thumb"
                                             />
@@ -309,7 +309,7 @@
                                     <article class="cart-item">
                                         <a href="./product-detail-logined.html" class="">
                                             <img
-                                                src="./assets/images/products/product-3.png"
+                                                src="./assets/images/products/product-3.jpg"
                                                 alt=""
                                                 class="cart-item__thumb"
                                             />
@@ -389,16 +389,16 @@
                                         <div class="col-4 col-xxl-5">
                                             <div class="cart-info__row">
                                                 <span>Subtotal:</span>
-                                                <span>$191.65</span>
+                                                <span></span>
                                             </div>
                                             <div class="cart-info__row">
                                                 <span>Shipping:</span>
-                                                <span>$10.00</span>
+                                                <span>10000 VND</span>
                                             </div>
                                             <div class="cart-info__separate"></div>
                                             <div class="cart-info__row cart-info__row-total">
                                                 <span>Total:</span>
-                                                <span>$201.65</span>
+                                                <span id="checkout-total"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -417,7 +417,7 @@
                                 </div>
                                 <div class="cart-info__row">
                                     <span>Shipping</span>
-                                    <span>$10.00</span>
+                                    <span>10000 VND</span>
                                 </div>
                                 <div class="cart-info__separate"></div>
                                 <div class="cart-info__row">
@@ -611,5 +611,7 @@
 
             <div class="modal__overlay"></div>
         </div>
+        <script type="module" src="./assets/js/header.js"></script>
+        <script src="./assets/js/shipping.js"></script>
     </body>
 </html>

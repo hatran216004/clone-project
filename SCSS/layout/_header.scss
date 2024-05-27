@@ -235,6 +235,7 @@
     }
 
     &__title {
+        min-width: 24px;
         font-size: 1.5rem;
         font-weight: 500;
         line-height: 146.667%;
@@ -405,9 +406,8 @@
     text-align: left;
 
     &__img-wrap {
-        padding-top: 100%;
+        padding-top: 80%;
         position: relative;
-        border: 1px solid rgba($color: #b9babe, $alpha: 0.5);
         border-radius: 10px;
     }
 
@@ -418,6 +418,7 @@
         top: 0;
         left: 0;
         object-fit: contain;
+        border-radius: 10px;
     }
 
     &__title {
@@ -470,5 +471,10 @@
         margin-top: 10px;
         padding-top: 10px;
         border-top: 1px solid var(--separate-color);
+    }
+
+    &__icon {
+        width: 14px;
+        height: 16px;
     }
 }

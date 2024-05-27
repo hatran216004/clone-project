@@ -2,10 +2,10 @@
 
 $error-color: #ed4337;
 .form {
-    &:has(:invalid) &__submit-btn {
-        opacity: 0.5;
-        pointer-events: none;
-    }
+    // &:has(:invalid) &__submit-btn {
+    //     opacity: 0.5;
+    //     pointer-events: none;
+    // }
 
     &__row {
         display: flex;
@@ -38,7 +38,7 @@ $error-color: #ed4337;
         }
     }
 
-    &__group:has(:invalid):has(&__input:not(:placeholder-shown)) {
+    &__group.invalid {
         .form__text-input {
             border-color: $error-color;
         }
@@ -383,9 +383,14 @@ $error-color: #ed4337;
         font-weight: 500;
         line-height: 142.857%;
 
-        transition: color 0.25s, background-color 0.25s;
+        transition: color 0.2s, background-color 0.2s;
 
         &:hover {
+            color: var(--form-tag-color-hover);
+            background: var(--form-tag-bg-hover);
+        }
+
+        &.active {
             color: var(--form-tag-color-hover);
             background: var(--form-tag-bg-hover);
         }
