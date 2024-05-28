@@ -42,6 +42,7 @@ const renderProduct = () => {
         .join(" ");
 
     productListElement.innerHTML = html;
+    localStorage.setItem("productList", JSON.stringify(productListFromLocalStorage));
 };
 renderProduct();
 
@@ -51,6 +52,7 @@ function attachProductClickEvents() {
 
     productElement.forEach((product, index) => {
         product.onclick = () => {
+            console.log(product);
             localStorage.setItem("selectedProduct", JSON.stringify(productListFromLocalStorage[index]));
         };
     });

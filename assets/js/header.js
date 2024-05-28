@@ -32,7 +32,7 @@ const updateDropDownCart = () => {
                                 class="cart-preview-item__thumb"
                             />
                         </div>
-                        <h3 class="cart-preview-item__title">${item.title}</h3>
+                        <h3 class="cart-preview-item__title line-clamp">${item.title}</h3>
                         <span class="cart-preview-item__price">${item.price * 0.9} VND</span>
                     </article>
                 </div>

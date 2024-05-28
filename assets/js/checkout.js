@@ -14,23 +14,43 @@ const estimatedTotalElement = document.querySelector(
 let productList = JSON.parse(localStorage.getItem("productsSelected"));
 
 const productObj = {};
+const productMap = {};
+
 productList.forEach((item) => {
-    productObj[item.id] = 1;
+    if (productObj[item.id]) {
+        productObj[item.id]++;
+    } else {
+        productObj[item.id] = 1;
+    }
 });
 
-const handleRender = (productList) => {
-    const resultSubtotal = productList.reduce((result, item) => {
+productList.forEach((item) => {
+    if (!productMap[item.id]) {
+        productMap[item.id] = { ...item };
+    } else {
+        productMap[item.id] = { ...productMap[item.id], ...item };
+    }
+});
+// Chuyển đổi productMap thành mảng các mục đã gộp
+const mergedProductList = Object.values(productMap);
+
+const handleRender = (mergedProductList) => {
+    const resultSubtotal = mergedProductList.reduce((result, item) => {
         return result + item.price * productObj[item.id];
     }, 0);
 
-    checkoutTotalItem.innerHTML = productList.length;
+    const result = mergedProductList.reduce((result, item) => {
+        return (result += productObj[item.id]);
+    }, 0);
+
+    checkoutTotalItem.innerHTML = result;
     checkoutSubtotalLeft.innerHTML = `${resultSubtotal} VND`;
     checkoutPriceTotal.innerHTML = `${resultSubtotal} VND`;
     checkoutTotal.innerHTML = `${resultSubtotal + 10000} VND`;
     estimatedTotalElement.innerHTML = `${resultSubtotal + 10000} VND`;
 
-    checkoutList.innerHTML = productList
-        .map((item) => {
+    checkoutList.innerHTML = mergedProductList
+        .map((item, index) => {
             return `
                 <article class="cart-item">
                     <a href="./product-detail-logined.html" class="">
@@ -86,7 +106,7 @@ const handleRender = (productList) => {
                                     Save
                                 </button>
                                 <button
-                                    onclick="handleDelete(${item.id})"
+                                    onclick="handleDelete(${item.id}, ${index})"
                                     class="cart-item__control-btn"
                                 >
                                     <img src="./assets/icons/delete.svg" alt="" />
@@ -101,22 +121,25 @@ const handleRender = (productList) => {
         .join(" ");
 };
 
-handleRender(productList);
+handleRender(mergedProductList);
 
 const handleDelete = (id) => {
-    productList = productList.filter((item) => item.id !== id);
-    handleRender(productList);
+    const foundProdIndex = mergedProductList.findIndex((item) => item.id === id);
+    if (foundProdIndex !== -1) {
+        mergedProductList.splice(foundProdIndex, 1);
+    }
+
+    handleRender(mergedProductList);
 };
 
 const handlePlus = (id) => {
     productObj[id]++;
-    handleRender(productList);
+    handleRender(mergedProductList);
 };
 
 const handleMinus = (id) => {
-    productObj[id]--;
-    if (productObj[id] === 0) {
-        productObj[id] = 1;
+    if (productObj[id] > 1) {
+        productObj[id]--;
+        handleRender(mergedProductList);
     }
-    handleRender(productList);
 };

@@ -15,8 +15,12 @@ favoriteProduct.forEach((item) => {
     productObj[item.id] = 1;
 });
 
-cartInfoDescElement.innerHTML = `${favoriteProduct.length} items`;
 const handleRender = (favoriteProduct) => {
+    const result = favoriteProduct.reduce((result, item) => {
+        return (result += productObj[item.id]);
+    }, 0);
+
+    cartInfoDescElement.innerHTML = `${result} items`;
     const html = favoriteProduct
         .map((item) => {
             return `
@@ -118,9 +122,8 @@ const handlePlus = (id) => {
 };
 
 const handleMinus = (id) => {
-    productObj[id]--;
-    if (productObj[id] === 0) {
-        productObj[id] = 1;
+    if (productObj[key] > 1) {
+        productObj[id]--;
+        handleRender(favoriteProduct);
     }
-    handleRender(favoriteProduct);
 };

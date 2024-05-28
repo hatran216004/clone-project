@@ -1,6 +1,7 @@
 import updateDropDownCart from "./header.js";
 
 const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
+console.log(selectedProduct);
 
 const addToCartBtn = document.querySelector(".btn.btn--primary.prod-info__add-to-cart");
 
