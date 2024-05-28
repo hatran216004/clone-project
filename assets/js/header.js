@@ -14,7 +14,7 @@ const updateDropDownCart = () => {
         return result + item.price;
     }, 0);
 
-    cartCountElement.innerHTML = productsSelected.length;
+    cartCountElement.innerHTML = productsSelected.length || 0;
     subtotalDropdown.innerHTML = `${subTotalValue} VND`;
     totalDropdown.innerHTML = `${subTotalValue + 10000} VND`;
 
@@ -53,7 +53,7 @@ export const hanldeUpdateLiked = () => {
         }
     }, 0);
 
-    heartElement.innerHTML = totalHeart;
+    heartElement.innerHTML = totalHeart || 0;
 };
 
 export const updateListLiked = () => {
