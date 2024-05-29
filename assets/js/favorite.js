@@ -122,7 +122,7 @@ const handlePlus = (id) => {
 };
 
 const handleMinus = (id) => {
-    if (productObj[key] > 1) {
+    if (productObj[id] > 1) {
         productObj[id]--;
         handleRender(favoriteProduct);
     }
