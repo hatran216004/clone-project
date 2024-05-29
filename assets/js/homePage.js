@@ -1,49 +1,5 @@
 import { productList } from "./data.js";
 
-window.addEventListener("load", () => {
-    const sliderInner = document.querySelector(".slideshow__inner");
-    const nextBtn = document.querySelector(".slideshow__next");
-    const prevBtn = document.querySelector(".slideshow__prev");
-    const sliderItems = document.querySelectorAll(".slideshow__item");
-    const sliderItemWidth = sliderItems[0].offsetWidth;
-    const sliderLength = sliderItems.length;
-
-    sliderItems.forEach((item) => {
-        const clone = item.cloneNode(true);
-        sliderInner.appendChild(clone);
-    });
-
-    let positionX = 0;
-    let index = 0;
-
-    nextBtn.addEventListener("click", () => {
-        handleChangeSlide(1);
-    });
-
-    prevBtn.addEventListener("click", () => {
-        handleChangeSlide(-1);
-    });
-
-    const handleChangeSlide = (direction) => {
-        if (direction === 1) {
-            index++;
-            if (index >= sliderLength) {
-                index = sliderLength - 1;
-                return;
-            }
-            positionX = positionX - sliderItemWidth;
-        } else if (direction === -1) {
-            index--;
-            if (index < 0) {
-                index = 0;
-                return;
-            }
-            positionX = positionX + sliderItemWidth;
-        }
-        sliderInner.style.transform = `translateX(${positionX}px)`;
-    };
-});
-
 const renderProduct = () => {
     const productListElement = document.getElementById("product-list");
     const html = productList

@@ -76,7 +76,7 @@ export const updateListLiked = () => {
                         />
                     </div>
                     <h3 class="cart-preview-item__title line-clamp">${item.title}</h3>
-                    <span class="cart-preview-item__price">${item.price}</span>
+                    <span class="cart-preview-item__price">${item.price} VND</span>
                 </article>
             </div>
         `;

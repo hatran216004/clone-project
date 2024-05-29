@@ -28,9 +28,13 @@
         <main class="container home">
             <div class="home__container">
                 <!-- Slideshow -->
-                <div class="slideshow">
-                    <div class="slideshow__inner">
-                        <div class="slideshow__item">
+                <div class="slideshow swiper">
+                    <div class="slideshow__prev swiper-button-prev">
+                        <img src="./assets/icons/arrow-right.svg" alt="" />
+                    </div>
+                    <div class="slideshow__inner swiper-wrapper">
+                        <!-- Slideshow item 1 -->
+                        <div class="slideshow__item swiper-slide">
                             <a href="#!" class="slideshow__link">
                                 <picture>
                                     <source
@@ -45,11 +49,46 @@
                                 </picture>
                             </a>
                         </div>
+                        <!-- Slideshow item 2 -->
+                        <div class="slideshow__item swiper-slide">
+                            <a href="#!" class="slideshow__link">
+                                <picture>
+                                    <source
+                                        media="(max-width: 767.98px)"
+                                        srcset="./assets/images/sildeshow/banner-img-md.png"
+                                    />
+                                    <img
+                                        src="./assets/images/sildeshow/banner-img-2.avif"
+                                        alt=""
+                                        class="slideshow__img"
+                                    />
+                                </picture>
+                            </a>
+                        </div>
+                        <!-- Slideshow item 3 -->
+                        <div class="slideshow__item swiper-slide">
+                            <a href="#!" class="slideshow__link">
+                                <picture>
+                                    <source
+                                        media="(max-width: 767.98px)"
+                                        srcset="./assets/images/sildeshow/banner-img-md.png"
+                                    />
+                                    <img
+                                        src="./assets/images/sildeshow/banner-img-3.avif"
+                                        alt=""
+                                        class="slideshow__img"
+                                    />
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slideshow__next swiper-button-next">
+                        <img src="./assets/icons/arrow-right.svg" alt="" />
                     </div>
                     <div class="slideshow__page">
                         <span class="slideshow__number">1</span>
                         <span class="slideshow__slider"></span>
-                        <span class="slideshow__number">5</span>
+                        <span class="slideshow__number">3</span>
                     </div>
                 </div>
             </div>
@@ -200,5 +239,24 @@
         </script>
         <script type="module" src="./assets/js/productList.js"></script>
         <script type="module" src="./assets/js/header.js"></script>
+        <script type="module">
+            import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";
+
+            const swiper = new Swiper(".swiper", {
+                // Optional parameters
+                direction: "horizontal",
+                loop: true,
+                speed: 600,
+
+                // Navigation arrows
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                autoplay: {
+                    delay: 1500,
+                },
+            });
+        </script>
     </body>
 </html>
