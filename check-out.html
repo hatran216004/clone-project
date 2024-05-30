@@ -63,7 +63,7 @@
                                     <div class="row">
                                         <div class="col-8 col-xxl-7">
                                             <div class="cart-info__back">
-                                                <a href="./" class="cart-info__back-link">
+                                                <a href="./index-logined.html" class="cart-info__back-link">
                                                     <img
                                                         src="./assets/icons/arrow-down-large.svg"
                                                         alt=""
@@ -146,21 +146,15 @@
         <!-- Modal: Comfirm delete cart item -->
         <div id="delete-comfirm" class="modal modal--small hide">
             <div class="modal__content">
-                <!-- <button class="modal__close js-toggle" toggle-target="#delete-comfirm">&times;</button> -->
                 <p class="modal__text">Are you sure you want to delete item?</p>
                 <div class="modal__bottom">
-                    <button class="btn btn--text btn--outline modal__btn js-toggle" toggle-target="#delete-comfirm">
-                        Cancel
-                    </button>
-                    <button
-                        class="btn btn--primary btn--danger btn--no-margin modal__btn js-toggle"
-                        toggle-target="#delete-comfirm"
-                    >
+                    <button class="btn btn--text btn--outline modal__btn" id="btn-cancel-delete">Cancel</button>
+                    <button class="btn btn--primary btn--danger btn--no-margin modal__btn" id="btn-confirm-delete">
                         Delete
                     </button>
                 </div>
             </div>
-            <div class="modal__overlay js-toggle" toggle-target="#delete-comfirm"></div>
+            <div class="modal__overlay"></div>
         </div>
         <script type="module" src="./assets/js/header.js"></script>
         <script src="./assets/js/checkout.js"></script>

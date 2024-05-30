@@ -1,8 +1,6 @@
 import { productList, categoryProduct } from "./data.js";
 import { hanldeUpdateLiked, updateListLiked } from "./header.js";
 
-const totleProduct = document.getElementById("totle-product");
-
 const renderProduct = () => {
     const productListFromLocalStorage = JSON.parse(localStorage.getItem("productList")) || productList;
 
@@ -20,7 +18,9 @@ const renderProduct = () => {
                                     class="product-card__thumb"
                                 />
                             </a>
-                            <button class="like-btn product-card__like-btn ${product.isLiked ? "like-btn--liked" : ""}">
+                            <button class="like-btn product-card__like-btn ${
+                                product.isLiked ? "like-btn--liked" : " "
+                            }" data-id="${product.id}">
                                 <img src="${product.liked}" alt="" class="like-btn__icon--liked" />
                                 <img src="${product.like}" alt="" class="like-btn__icon icon" />
                             </button>
@@ -43,7 +43,35 @@ const renderProduct = () => {
 
     productListElement.innerHTML = html;
     localStorage.setItem("productList", JSON.stringify(productListFromLocalStorage));
+    attachLikeButtonEvents(); // Gắn sự kiện cho các nút like sau khi render
 };
+
+const attachLikeButtonEvents = () => {
+    const likeBtns = document.querySelectorAll(".like-btn.product-card__like-btn");
+    likeBtns.forEach((btn) => {
+        btn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const idProd = parseInt(btn.getAttribute("data-id"), 10);
+            handleLiked(idProd);
+        });
+    });
+};
+
+const handleLiked = (idProd) => {
+    console.log(idProd);
+    const prodLocal = JSON.parse(localStorage.getItem("productList"));
+    prodLocal.forEach((item) => {
+        if (item.id === idProd) {
+            item.isLiked = !item.isLiked;
+        }
+    });
+
+    localStorage.setItem("productList", JSON.stringify(prodLocal));
+    renderProduct();
+    hanldeUpdateLiked();
+    updateListLiked();
+};
+
 renderProduct();
 
 function attachProductClickEvents() {
@@ -52,14 +80,13 @@ function attachProductClickEvents() {
 
     productElement.forEach((product, index) => {
         product.onclick = () => {
-            console.log(product);
             localStorage.setItem("selectedProduct", JSON.stringify(productListFromLocalStorage[index]));
         };
     });
 }
 attachProductClickEvents();
 
-// category filter
+// Lọc theo danh mục
 const categoryElement = document.getElementById("category");
 
 categoryElement.innerHTML = categoryProduct
@@ -86,7 +113,6 @@ categoryElement.innerHTML = categoryProduct
 
 const cateElements = document.querySelectorAll(".cate-item");
 
-// Biến để theo dõi danh mục đang được áp dụng hiện tại
 let currentCategory = null;
 
 cateElements.forEach((item, index) => {
@@ -96,13 +122,12 @@ cateElements.forEach((item, index) => {
         if (selectedCategory !== currentCategory) {
             const productCate = productList.filter((product) => product.category === selectedCategory);
             localStorage.setItem("productList", JSON.stringify(productCate));
-            currentCategory = selectedCategory; // Cập nhật danh mục hiện tại
+            currentCategory = selectedCategory;
             renderProduct();
             attachProductClickEvents();
         } else {
-            // Nếu danh mục được chọn trùng với danh mục hiện tại, trả về danh sách sản phẩm ban đầu
             localStorage.setItem("productList", JSON.stringify(productList));
-            currentCategory = null; // Đặt lại danh mục hiện tại
+            currentCategory = null;
             renderProduct();
             hanldeUpdateLiked();
             updateListLiked();
@@ -110,21 +135,21 @@ cateElements.forEach((item, index) => {
     };
 });
 
-const likeBtns = document.querySelectorAll(".like-btn.product-card__like-btn");
+// Tìm kiếm
+const handleSearch = () => {
+    let valueSearch = searchInput.value;
+    const searchItems = productList.filter((item) => item.title.toLowerCase().includes(valueSearch.toLowerCase()));
+    localStorage.setItem("productList", JSON.stringify([...searchItems]));
+    renderProduct();
+};
 
-likeBtns.forEach((item, index) => {
-    item.onclick = () => {
-        const prodLocal = JSON.parse(localStorage.getItem("productList"));
-        if (!prodLocal[index].isLiked) {
-            item.classList.add("like-btn--liked");
-            prodLocal[index].isLiked = true;
-        } else {
-            item.classList.remove("like-btn--liked");
-            prodLocal[index].isLiked = false;
-        }
+const searchInput = document.querySelector(".search__input");
+const searchBtn = document.querySelector(".search__input + img");
 
-        localStorage.setItem("productList", JSON.stringify(prodLocal));
-        hanldeUpdateLiked();
-        updateListLiked();
-    };
+searchBtn.addEventListener("click", handleSearch);
+
+window.addEventListener("keydown", (e) => {
+    if (e.keyCode === 13) {
+        handleSearch();
+    }
 });

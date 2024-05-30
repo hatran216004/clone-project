@@ -256,6 +256,13 @@ img {
   overflow: hidden;
 }
 
+.empty__cart-img {
+  margin: 0 auto;
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}
+
 .row > *, .container-fluid, .container {
   padding-left: calc(var(--grid-gutter-x) * 0.5);
   padding-right: calc(var(--grid-gutter-x) * 0.5);
@@ -1399,6 +1406,10 @@ img {
   padding: 20px 0;
   background-color: var(--header-background);
 }
+.header.fixed {
+  position: sticky;
+  top: -8px;
+}
 @media (max-width: 991.98px) {
   .header {
     box-shadow: 0px 20px 60px 10px var(--header-shadow-color);
@@ -1811,6 +1822,30 @@ img {
 .user-menu__icon {
   width: 14px;
   height: 16px;
+}
+
+.search__wrapper {
+  padding: 0 16px;
+  min-width: 180px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+.search__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.search__input {
+  flex: 1;
+  height: 100%;
+  color: #000000;
+}
+.search__input + img {
+  margin-left: 8px;
 }
 
 .footer {

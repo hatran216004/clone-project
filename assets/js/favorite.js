@@ -16,6 +16,13 @@ favoriteProduct.forEach((item) => {
 });
 
 const handleRender = (favoriteProduct) => {
+    if (favoriteProduct.length === 0) {
+        cartListElement.innerHTML = `<img class="empty__cart-img" src="./assets/images/empty-cart.jpg" alt="" />`;
+        cartListElement.style.display = "flex";
+        cartListElement.style.justifyContent = "center";
+        return;
+    }
+
     const result = favoriteProduct.reduce((result, item) => {
         return (result += productObj[item.id]);
     }, 0);
@@ -85,7 +92,7 @@ const handleRender = (favoriteProduct) => {
                                             Save
                                         </button>
                                         <button
-                                            onclick="handleDelete(${item.id})"
+                                            onclick="handleShowModalDelete(${item.id})"
                                             class="cart-item__control-btn"
                                         >
                                             <img src="./assets/icons/delete.svg" alt="" />
@@ -126,4 +133,64 @@ const handleMinus = (id) => {
         productObj[id]--;
         handleRender(favoriteProduct);
     }
+};
+
+// hide when click overlay
+const overlayElements = document.querySelectorAll(".modal__overlay");
+const modalElements = document.querySelectorAll(".modal");
+
+overlayElements.forEach((item, index) => {
+    item.addEventListener("click", () => {
+        modalElements[index].classList.remove("show");
+    });
+});
+
+// modal delete item
+let currDelete = null;
+const modalDelete = document.getElementById("delete-comfirm");
+const btnDeleteConfirm = document.getElementById("btn-confirm-delete");
+const btnCancelDelete = document.getElementById("btn-cancel-delete");
+
+const hideModalDelete = () => {
+    modalDelete.classList.remove("show");
+    currDelete = null;
+};
+
+btnCancelDelete.addEventListener("click", hideModalDelete);
+
+const handleShowModalDelete = (id) => {
+    modalDelete.classList.add("show");
+    currDelete = favoriteProduct.find((item) => item.id === id);
+};
+
+const handleConfirmDelete = () => {
+    favoriteProduct = favoriteProduct.filter((item) => item.id !== currDelete.id);
+
+    const foundIndex = productList.findIndex((item) => item.id === currDelete.id);
+    if (foundIndex !== -1) {
+        productList[foundIndex].isLiked = false;
+        localStorage.setItem("productList", JSON.stringify(productList));
+        hanldeUpdateLiked();
+    }
+
+    // delete and render
+    handleRender(favoriteProduct);
+    hideModalDelete();
+};
+btnDeleteConfirm.addEventListener("click", handleConfirmDelete);
+
+// update quantity heart
+const hanldeUpdateLiked = () => {
+    const productList = JSON.parse(localStorage.getItem("productList")) || [];
+    const heartElement = document.getElementById("product-heart");
+
+    const totalHeart = productList.reduce((result, item) => {
+        if (item.isLiked) {
+            return result + 1;
+        } else {
+            return result + 0;
+        }
+    }, 0);
+
+    heartElement.innerHTML = totalHeart || 0;
 };

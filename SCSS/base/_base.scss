@@ -121,3 +121,10 @@ img {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.empty__cart-img {
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}

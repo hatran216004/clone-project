@@ -11,6 +11,11 @@
     padding: 20px 0;
     background-color: var(--header-background);
 
+    &.fixed {
+        position: sticky;
+        top: -8px;
+    }
+
     @include abstract.screen(lg) {
         box-shadow: 0px 20px 60px 10px var(--header-shadow-color);
         padding: 20px 0;
@@ -476,5 +481,36 @@
     &__icon {
         width: 14px;
         height: 16px;
+    }
+}
+
+.search {
+    &__wrapper {
+        padding: 0 16px;
+        min-width: 180px;
+        height: 42px;
+
+        display: flex;
+        align-items: center;
+
+        border-radius: 999px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
+
+    &__inner {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    &__input {
+        flex: 1;
+        height: 100%;
+        color: #000000;
+
+        & + img {
+            margin-left: 8px;
+        }
     }
 }

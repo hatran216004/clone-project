@@ -31,10 +31,31 @@ productList.forEach((item) => {
         productMap[item.id] = { ...productMap[item.id], ...item };
     }
 });
+
 // Chuyển đổi productMap thành mảng các mục đã gộp
-const mergedProductList = Object.values(productMap);
+let mergedProductList = Object.values(productMap);
 
 const handleRender = (mergedProductList) => {
+    if (mergedProductList.length === 0) {
+        const rowsElement = document.querySelectorAll(".col-4.col-xxl-5 .cart-info__row");
+        const separateElement = document.querySelector(".col-4.col-xxl-5 .cart-info__separate");
+        rowsElement.forEach((item) => {
+            item.classList.add("d-none");
+        });
+        separateElement.classList.add("d-none");
+        checkoutList.innerHTML = `<img class="empty__cart-img" src="./assets/images/empty-cart.jpg" alt="" />`;
+
+        checkoutList.style.display = "flex";
+        checkoutList.style.justifyContent = "center";
+
+        checkoutTotalItem.innerHTML = 0;
+        checkoutPriceTotal.innerHTML = 0;
+        checkoutSubtotalLeft.innerHTML = 0;
+        checkoutTotal.innerHTML = 0;
+        estimatedTotalElement.innerHTML = 0;
+        return;
+    }
+
     const resultSubtotal = mergedProductList.reduce((result, item) => {
         return result + item.price * productObj[item.id];
     }, 0);
@@ -106,7 +127,7 @@ const handleRender = (mergedProductList) => {
                                     Save
                                 </button>
                                 <button
-                                    onclick="handleDelete(${item.id}, ${index})"
+                                    onclick="handleShowModalDelete(${item.id}, ${index})"
                                     class="cart-item__control-btn"
                                 >
                                     <img src="./assets/icons/delete.svg" alt="" />
@@ -123,15 +144,6 @@ const handleRender = (mergedProductList) => {
 
 handleRender(mergedProductList);
 
-const handleDelete = (id) => {
-    const foundProdIndex = mergedProductList.findIndex((item) => item.id === id);
-    if (foundProdIndex !== -1) {
-        mergedProductList.splice(foundProdIndex, 1);
-    }
-
-    handleRender(mergedProductList);
-};
-
 const handlePlus = (id) => {
     productObj[id]++;
     handleRender(mergedProductList);
@@ -142,4 +154,89 @@ const handleMinus = (id) => {
         productObj[id]--;
         handleRender(mergedProductList);
     }
+};
+
+// hide when click overlay
+const overlayElement = document.querySelector(".modal__overlay");
+const modalElements = document.querySelectorAll(".modal");
+
+overlayElement.addEventListener("click", () => {
+    modalElements[index].classList.remove("show");
+});
+
+// modal delete item
+let currDelete = null;
+const modalDelete = document.getElementById("delete-comfirm");
+const btnDeleteConfirm = document.getElementById("btn-confirm-delete");
+const btnCancelDelete = document.getElementById("btn-cancel-delete");
+
+const hideModalDelete = () => {
+    modalDelete.classList.remove("show");
+    currDelete = null;
+};
+
+btnCancelDelete.addEventListener("click", hideModalDelete);
+
+const handleShowModalDelete = (id) => {
+    modalDelete.classList.add("show");
+    currDelete = mergedProductList.find((item) => item.id === id);
+};
+
+const handleConfirmDelete = () => {
+    mergedProductList = mergedProductList.filter((item) => item.id !== currDelete.id);
+
+    // update quantity product at header
+    const foundIndex = productList.findIndex((item) => item.id === currDelete.id);
+    if (foundIndex !== -1) {
+        productList.splice(foundIndex, productObj[productList[foundIndex].id]);
+        localStorage.setItem("productsSelected", JSON.stringify(productList));
+        updateDropDownCart();
+    }
+
+    // delete and render
+    handleRender(mergedProductList);
+    hideModalDelete();
+};
+btnDeleteConfirm.addEventListener("click", handleConfirmDelete);
+
+// update header
+const updateDropDownCart = () => {
+    const productsSelected = JSON.parse(localStorage.getItem("productsSelected")) || [];
+
+    const cartCountElement = document.getElementById("totle-product");
+    const titleCart = document.getElementById("act-dropdow__title--cart");
+    const cartDropdownElement = document.getElementById("dropdown-list-cart");
+    const subtotalDropdown = document.getElementById("dropdown-subtotal");
+    const totalDropdown = document.getElementById("dropdown-total");
+
+    // subtotal price
+    const subTotalValue = productsSelected.reduce((result, item) => {
+        return result + item.price;
+    }, 0);
+
+    cartCountElement.innerHTML = productsSelected.length || 0;
+    subtotalDropdown.innerHTML = `${subTotalValue} VND`;
+    totalDropdown.innerHTML = `${subTotalValue + 10000} VND`;
+
+    titleCart.innerHTML = `You have ${productsSelected.length} items`;
+
+    cartDropdownElement.innerHTML = productsSelected
+        .map((item) => {
+            return ` 
+                <div class="col">
+                    <article class="cart-preview-item">
+                        <div class="cart-preview-item__img-wrap">
+                            <img
+                                src="${item.img}"
+                                alt="${item.title}"
+                                class="cart-preview-item__thumb"
+                            />
+                        </div>
+                        <h3 class="cart-preview-item__title line-clamp">${item.title}</h3>
+                        <span class="cart-preview-item__price">${item.price * 0.9} VND</span>
+                    </article>
+                </div>
+            `;
+        })
+        .join(" ");
 };
