@@ -15,6 +15,24 @@ let dataAddressUser = [
     },
 ];
 
+let dataCitys = [
+    "Hà Nội",
+    " TP. Hồ Chí Minh",
+    "Đà Nẵng",
+    "Hải Phòng",
+    "Cần Thơ",
+    "Biên Hòa",
+    "Nha Trang",
+    "Huế",
+    "Vinh",
+    "Hải Dương",
+    "Quy Nhơn",
+    "Buôn Ma Thuột",
+    "Nam Định",
+    "Vũng Tàu",
+    "Thái Nguyên ",
+];
+
 // add address
 const btnAddNewAddress = document.getElementById("btn-add-new-address");
 const closeBtn = document.getElementById("modal-close-btn");
@@ -27,9 +45,39 @@ const addressInput = document.getElementById("address");
 const submitBtn = document.getElementById("submit-address-btn");
 const formInvalid = document.querySelectorAll(".form__group");
 const selectDialog = document.getElementById("select-dialog");
-const formCityOpts = document.querySelectorAll(".form___option");
 const optInput = document.getElementById("city");
+const formOptList = document.querySelector(".form__options-list");
+const searchInput = document.querySelector(".form__search-input");
+const searchBtn = document.querySelector(".form__search-icon");
 
+// render select city form
+const handleRenderCityForm = (dataCitys) => {
+    formOptList.innerHTML = dataCitys
+        .map((city) => {
+            return `<li class="form___option">${city}</li>`;
+        })
+        .join(" ");
+
+    const formCityOpts = document.querySelectorAll(".form___option");
+    formCityOpts.forEach((opt) => {
+        opt.onclick = () => {
+            optInput.value = opt.innerText;
+            selectDialog.classList.remove("show");
+        };
+    });
+};
+
+handleRenderCityForm(dataCitys);
+
+// search opt select
+const handleSearchAddress = () => {
+    console.log(searchInput.value);
+    let searchItems = dataCitys.filter((city) => city.toLowerCase().includes(searchInput.value.toLowerCase()));
+    handleRenderCityForm(searchItems);
+};
+searchBtn.addEventListener("click", handleSearchAddress);
+
+// handle form address
 let currEdit = null;
 
 const renderCardAddress = (dataCartList) => {
@@ -122,13 +170,6 @@ btnCancel.addEventListener("click", (e) => {
     hideModal(e);
 });
 
-formCityOpts.forEach((opt) => {
-    opt.onclick = () => {
-        optInput.value = opt.innerText;
-        selectDialog.classList.remove("show");
-    };
-});
-
 // submit
 const handleAddAddress = () => {
     const newUserAddress = {
@@ -156,7 +197,6 @@ submitBtn.addEventListener("click", (e) => {
 });
 
 const handleStartEditAddress = (userId) => {
-    console.log(userId);
     const foundIndex = dataAddressUser.findIndex((item) => item.id === userId);
     if (foundIndex !== -1) {
         modalSubmitAddress.classList.add("show");
@@ -174,6 +214,7 @@ const handlefinishEdit = (currEdit) => {
         dataAddressUser[foundIndexEdit].name = nameInput.value;
         dataAddressUser[foundIndexEdit].address = addressInput.value;
         dataAddressUser[foundIndexEdit].tel = phoneInput.value;
+        dataAddressUser[foundIndexEdit].city = optInput.value;
 
         currEdit = null;
         modalSubmitAddress.classList.remove("show");
