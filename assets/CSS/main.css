@@ -1454,7 +1454,7 @@ img {
 }
 
 .navbar {
-  margin-left: 129px;
+  margin-left: 80px;
 }
 @media (max-width: 1199.98px) {
   .navbar {
@@ -2074,7 +2074,7 @@ img {
 
 .top-menu {
   --main-column-width: 292px;
-  --max-inner-height: calc(min(582px, 100vh - 134px) - var(--inner-padding) * 2);
+  --max-inner-height: calc(min(350px, 100vh - 134px) - var(--inner-padding) * 2);
   position: relative;
 }
 .top-menu__main {
