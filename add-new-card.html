@@ -164,7 +164,7 @@
                                             </a>
                                             Add credit or debit card
                                         </h2>
-                                        <form action="" class="form form-card">
+                                        <form action="" class="form form-card" id="form-1">
                                             <!-- Form row 1 -->
                                             <div class="form__row">
                                                 <div class="form__group">
@@ -173,7 +173,6 @@
                                                     </label>
                                                     <div class="form__text-input">
                                                         <input
-                                                            autofocus
                                                             required
                                                             type="text"
                                                             name=""
@@ -375,5 +374,23 @@
             </div>
             <div class="modal__overlay js-toggle" toggle-target="#delete-comfirm"></div>
         </div>
+        <script src="./assets/js/validator.js"></script>
+        <script>
+            Validator({
+                form: "#form-1",
+                formGroupSelector: ".form__group",
+                errorSelector: ".form__error",
+                rules: [
+                    Validator.isRequired("#first-name", "Please enter this field!"),
+                    Validator.isRequired("#last-name", "Please enter this field!"),
+                    Validator.isRequired("#card-number", "Please enter this field!"),
+                    Validator.minLength("#card-number", 10, "Need at least 10 characters!"),
+                    Validator.isRequired("#card-cvv", "Please enter this field!"),
+                    Validator.isRequired("#phone-number", "Please enter this field!"),
+                    Validator.minLength("#phone-number", 10, "Need at least 10 characters!"),
+                ],
+            });
+        </script>
+        <script type="module" src="./assets/js/header.js"></script>
     </body>
 </html>
