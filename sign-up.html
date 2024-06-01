@@ -151,7 +151,8 @@
             const inputEmail = document.getElementById("email");
             const inputPassword = document.getElementById("password");
 
-            btnSignUp.addEventListener("click", () => {
+            btnSignUp.addEventListener("click", (e) => {
+                e.preventDefault();
                 const email = inputEmail.value;
                 const password = inputPassword.value;
                 const auth = {
@@ -159,6 +160,7 @@
                     password,
                 };
                 localStorage.setItem("auth", JSON.stringify(auth));
+                window.location.href = "./sign-in.html";
             });
         </script>
     </body>
