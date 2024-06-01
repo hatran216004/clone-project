@@ -17,7 +17,7 @@ favoriteProduct.forEach((item) => {
 
 const handleRender = (favoriteProduct) => {
     if (favoriteProduct.length === 0) {
-        cartListElement.innerHTML = `<img class="empty__cart-img" src="./assets/images/empty-cart.jpg" alt="" />`;
+        cartListElement.innerHTML = `<img class="empty__cart-img" src="./assets/images/empty-cart.png" alt="" />`;
         cartListElement.style.display = "flex";
         cartListElement.style.justifyContent = "center";
         return;

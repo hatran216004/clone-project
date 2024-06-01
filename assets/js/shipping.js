@@ -42,7 +42,7 @@ const handleRender = (mergedProductList) => {
             item.classList.add("d-none");
         });
         separateElement.classList.add("d-none");
-        checkoutList.innerHTML = `<img class="empty__cart-img" src="./assets/images/empty-cart.jpg" alt="" />`;
+        checkoutList.innerHTML = `<img class="empty__cart-img" src="./assets/images/empty-cart.png" alt="" />`;
 
         checkoutList.style.display = "flex";
         checkoutList.style.justifyContent = "center";
