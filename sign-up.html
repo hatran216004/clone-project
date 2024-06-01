@@ -143,8 +143,22 @@
                         },
                         "Password and Comfirm Password does not match"
                     ),
-                    Validator.isRequiredCheckbox("input[name='gender']", "Please enter this field!"),
                 ],
+            });
+        </script>
+        <script>
+            const btnSignUp = document.querySelector(".btn.btn--primary.auth__btn.form__submit-btn");
+            const inputEmail = document.getElementById("email");
+            const inputPassword = document.getElementById("password");
+
+            btnSignUp.addEventListener("click", () => {
+                const email = inputEmail.value;
+                const password = inputPassword.value;
+                const auth = {
+                    email,
+                    password,
+                };
+                localStorage.setItem("auth", JSON.stringify(auth));
             });
         </script>
     </body>
