@@ -45,7 +45,6 @@
                         <div class="form__group">
                             <div class="form__text-input">
                                 <input
-                                    autofocus
                                     required
                                     type="email"
                                     name=""
@@ -70,7 +69,12 @@
                                     placeholder="Password"
                                     minlength="6"
                                 />
-                                <img src="./assets/images/auth/lock.svg" alt="" class="form__input-icon" />
+                                <img
+                                    src="./assets/images/auth/lock-open.svg"
+                                    alt=""
+                                    class="form__input-icon form__input-icon-clock-open d-none"
+                                />
+                                <img src="./assets/images/auth/lock.svg" alt="" class="form__input-icon lock-icon" />
                                 <img src="./assets/icons/form-error.svg" alt="" class="form__input-icon--error" />
                             </div>
                             <p class="form__error">Use a minimum of 6 characters</p>
@@ -123,6 +127,23 @@
             const btnSignUp = document.querySelector(".btn.btn--primary.auth__btn.form__submit-btn");
             const inputEmail = document.getElementById("email");
             const inputPassword = document.getElementById("password");
+
+            // show password
+            const lockElement = document.querySelector(".lock-icon");
+            const lockOpenElement = document.querySelector(".form__input-icon-clock-open");
+
+            lockElement.onclick = () => {
+                lockElement.classList.toggle("d-none");
+                lockOpenElement.classList.toggle("d-none");
+                inputPassword.setAttribute("type", "text");
+            };
+
+            lockOpenElement.onclick = () => {
+                lockElement.classList.toggle("d-none");
+                lockOpenElement.classList.toggle("d-none");
+                inputPassword.setAttribute("type", "password");
+            };
+            // end show password
 
             btnSignUp.addEventListener("click", (e) => {
                 e.preventDefault();

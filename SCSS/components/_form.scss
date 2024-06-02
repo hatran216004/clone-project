@@ -2,11 +2,6 @@
 
 $error-color: #ed4337;
 .form {
-    // &:has(:invalid) &__submit-btn {
-    //     opacity: 0.5;
-    //     pointer-events: none;
-    // }
-
     &__row {
         display: flex;
         gap: 30px;
@@ -250,6 +245,13 @@ $error-color: #ed4337;
     &__input {
         &-icon {
             margin-left: 12px;
+
+            &-clock-open {
+                width: 24px;
+                height: 24px;
+                filter: brightness(0) saturate(100%) invert(68%) sepia(5%) saturate(419%) hue-rotate(206deg)
+                    brightness(92%) contrast(88%);
+            }
         }
     }
 

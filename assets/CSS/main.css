@@ -2937,6 +2937,11 @@ img {
 .form__input-icon {
   margin-left: 12px;
 }
+.form__input-icon-clock-open {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(68%) sepia(5%) saturate(419%) hue-rotate(206deg) brightness(92%) contrast(88%);
+}
 .form__pull-right {
   margin-left: auto;
 }
